@@ -29,7 +29,7 @@ stages:
         useDefaultContext: false
         buildContext: '.'
      
-    - task: Docker@2
+    - task: Docker@1
       displayName: 'Push the Docker image to Dockerhub'
       inputs:
         containerregistrytype: 'Container Registry'
@@ -37,3 +37,5 @@ stages:
         command: 'Push an image'
         imageName: '$(ImageName)'
       condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+      
+        
