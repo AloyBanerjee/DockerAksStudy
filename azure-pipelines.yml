@@ -15,7 +15,7 @@ stages:
   displayName: Build image
   jobs:  
   - job: Build
-    displayName: Build and push Docker image
+    displayName: Build Docker image
     steps:
     - task: Docker@1
       displayName: 'Build the Docker image'
@@ -28,8 +28,15 @@ stages:
         includeLatestTag: true
         useDefaultContext: false
         buildContext: '.'
-     
-    - task: Docker@2
+
+- stage: Push
+  displayName: Push image
+  jobs:  
+  - job: Push
+    displayName: Push Docker image
+    steps:
+    
+    - task: Docker@1
       displayName: 'Push the Docker image to Dockerhub'
       inputs:
         containerregistrytype: 'Container Registry'
